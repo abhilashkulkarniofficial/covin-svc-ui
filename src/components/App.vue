@@ -3,12 +3,22 @@
     <v-app-bar color="#D46A6A" dark app flat>
       <v-toolbar-title>Vaccine Availability Tracker</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn icon @click="showSearch=true">
-        <v-icon>mdi-crosshairs</v-icon>
+      <v-tooltip bottom>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn icon @click="showSearch=true" v-bind="attrs" v-on="on">
+          <v-icon>mdi-crosshairs</v-icon>
       </v-btn>
-      <v-btn icon @click="showSearch=false">
-        <v-icon>mdi-account-plus</v-icon>
+      </template>
+      <span>Search</span>
+    </v-tooltip>
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn icon @click="showSearch=false" v-bind="attrs" v-on="on">
+          <v-icon>mdi-account-plus</v-icon>
       </v-btn>
+      </template>
+      <span>Subscribe</span>
+    </v-tooltip>
     </v-app-bar>
 
     
@@ -17,6 +27,12 @@
       <Search v-if="showSearch"/>
       <Register v-if="!showSearch"/>
     </v-main>
+
+    <v-footer padless color="white">
+    <v-col class="text-center text-caption" cols="12">
+      Stay Home. Stay Safe.
+    </v-col>
+  </v-footer>
 
   </v-app>
 </template>
