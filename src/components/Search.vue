@@ -1,23 +1,40 @@
 <template>
-    <v-container>
+    <v-container fluid>
         <div>
-            <v-card class="d-flex" flat>
+            <v-card flat  align="center">
+                <v-card-subtitle>
+                    Search for vaccine availability using Pincode or District.
+                </v-card-subtitle>
                 <v-card-text>
                     <v-container grid-list-md text-xs-center>
-                        <v-layout row wrap>
-                            <v-flex xs12 sm4 md3 my-n2>
-                                <v-text-field v-model="pincode" label="Enter 6 digit Pincode" placeholder="110001" outlined clearable dense small></v-text-field>
-                            </v-flex>
-                            <v-flex xs12 sm4 md4 my-n2>
-                                <v-select v-model="state" :items="states" item-text="state_name" item-value="state_id" label="Select State" placeholder="Karnataka" outlined dense></v-select>
-                            </v-flex>
-                            <v-flex xs12 sm4 md3 my-n2>
-                                <v-select v-model="district" :items="districts" item-text="district_name" item-value="district_id" label="Select District" placeholder="Bengaluru Urban" outlined dense></v-select>
-                            </v-flex>
-                            <v-flex xs12 sm12 md2 my-n1>
-                                <v-btn class="black--text" color="#FFAAAA" :disabled="disable[0] && (disable[1] || district==null) " @click="searchCenters" block>Search</v-btn>
-                            </v-flex>
-                        </v-layout>
+                        <v-row>
+                            <v-layout row wrap>
+                                <v-flex xs12 sm4 md4 my-n2>
+                                    <v-text-field v-model="pincode" label="Enter 6 digit Pincode" placeholder="110001" outlined clearable dense small></v-text-field>
+                                </v-flex>
+                                <v-flex xs12 sm4 md4 my-n2>
+                                    <v-select v-model="state" :items="states" item-text="state_name" item-value="state_id" label="Select State" placeholder="Karnataka" outlined dense></v-select>
+                                </v-flex>
+                                <v-flex xs12 sm4 md4 my-n2>
+                                    <v-select v-model="district" :items="districts" item-text="district_name" item-value="district_id" label="Select District" placeholder="Bengaluru Urban" outlined dense></v-select>
+                                </v-flex>
+                            </v-layout>
+                        </v-row>
+                        <v-row>
+                            <v-layout row wrap>
+                                <v-flex xs12 sm4 md4 my-n1 px-2>
+                                    <Date v-model="selectedDate" label="From" @input="closeDate()"/>
+                                </v-flex>
+                                <!-- <v-flex xs12 sm4 md4 my-n2>
+                                    <v-select v-model="vaccine" :items="vaccines" item-text="vaccine_name" item-value="vaccine_id" label="Vaccine Preference" placeholder="Covishield" outlined dense></v-select>
+                                </v-flex> -->
+                                <v-flex offset-md6 offset-xs3 xs6 sm4 md2 my-n2>
+                                    <v-btn class="white--text" color="#D46A6A" :disabled="disable[0] && (disable[1] || district==null) " @click="searchCenters" block>Search</v-btn>
+                                </v-flex>
+                            </v-layout>
+                        </v-row>
+                            
+                        
                     </v-container>
                 </v-card-text>
             </v-card>
@@ -33,9 +50,7 @@
                     </v-tab-item>
                 </v-tabs-items>
             </v-card> -->
-            
-        </div>
-       <div>
+
            <v-row justify="start">
                <v-col v-for="(slot, index) in slots" :key="index" cols="12"  sm="6" md="4">
                    <v-card class="mx-auto" max-width="344" >
@@ -83,13 +98,15 @@
 <script>
 import { mapGetters } from 'vuex'
 import moment from 'moment'
+import Date from '../basic/date.vue'
   export default {
+      components:{Date},
       computed:{
-        ...mapGetters('search', {
-      centerSlots: 'getSlots',
-      states:  'getStates',
-      districts: 'getDistricts'
-    })
+        ...mapGetters({
+      centerSlots: 'search/getSlots',
+      states:  'search/getStates',
+      districts: 'search/getDistricts'
+        })
     },
     data () {
       return {
@@ -102,6 +119,13 @@ import moment from 'moment'
         reveal:false,
         tab:null,
         items: [],
+        vaccines: [
+            {vaccine_name:'Covishield', vaccine_id:'covishield'},
+            {vaccine_name:'Covaxin', vaccine_id:'covaxin'},
+            {vaccine_name:'Sputnik', vaccine_id:'sputnik'},
+        ],
+        vaccine:null,
+        selectedDate:null
       }
     },
     watch: {
@@ -132,7 +156,9 @@ import moment from 'moment'
             if(this.district){
                 this.filter['district_id'] = this.district
             }
-            this.filter['date'] = this.currentDateTime()
+            if(!this.selectedDate){
+                this.filter['date'] = this.currentDateTime()
+            }
             this.filter['searchBy'] = this.disable
             // console.log(this.filter)
             await this.$store.dispatch('search/searchCenters',this.filter)
@@ -145,6 +171,9 @@ import moment from 'moment'
             for(let i=0;i<7; i++){
                 this.items.push(moment().add(i, 'days').format('DD-MM-YYYY'))
             }
+        },
+        closeDate(){
+            this.filter['date'] = this.selectedDate
         }
     },
     mounted(){
