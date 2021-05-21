@@ -47,7 +47,7 @@ export default {
     },
     watch:{
         dateDisp(val){
-            console.log(val)
+            // console.log(val)
             const [year, month, day] = val.split('-')
             this.$emit('input', `${day}-${month}-${year}`)
         }

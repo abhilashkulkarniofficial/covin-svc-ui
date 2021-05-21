@@ -6,11 +6,11 @@
                 About Us
               </v-card-title>
                 <v-card-text>
-                    <p>Were a bunch of programmers who're trying to help those to need us the most. 
+                    <p>We're a bunch of programmers who're trying to help those who need vaccine the most. 
                     This application is built to help people find vaccines asap nearby and get vaccinated.
                     If you're interested in contributing to this application, checkout our github repo
                     <a href="https://github.com/abhilashkulkarniofficial/covin-svc-ui" target="_blank">covin-svc-ui</a> 
-                    and contribute there with code.</p>
+                    and contribute there in the form of code.</p>
                     <p>Thank you for being here ❤️</p>
                 </v-card-text>
                 <v-card-actions class="justify-center">
