@@ -34,13 +34,14 @@ export default {
         };
     },
     computed: {
+        /* eslint-disable */
         dateDisp:{
             get: function(){
                 // console.log(this.dateVal)
                 return this.dateVal
             },
             set: function(val){
-                console.log(val)
+                // console.log(val)
             }
         }
     },

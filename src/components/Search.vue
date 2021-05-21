@@ -23,7 +23,7 @@
                         <v-row>
                             <v-layout row wrap>
                                 <v-flex xs12 sm4 md4 my-n1 px-2>
-                                    <Date v-model="selectedDate" label="From" @input="closeDate()"/>
+                                    <Date v-model="selectedDate" label="Date" @input="closeDate()"/>
                                 </v-flex>
                                 <!-- <v-flex xs12 sm4 md4 my-n2>
                                     <v-select v-model="vaccine" :items="vaccines" item-text="vaccine_name" item-value="vaccine_id" label="Vaccine Preference" placeholder="Covishield" outlined dense></v-select>
@@ -59,7 +59,7 @@
                         <div class="text--primary">
                             <strong>Date:</strong> {{slot.date}}<br/>
                             <strong>Address:</strong><br/>
-                            {{slot.address}}<br/>
+                            {{slot.address.substring(0,30)+'...'}}<br/>
                             <strong>Vaccine:</strong> {{slot.vaccine}}<br/>
                             <strong>Available Capacity:</strong> {{slot.available_capacity}}<br/>
                             <strong>Fee Type:</strong> {{slot.fee_type}}<br/>
@@ -69,6 +69,10 @@
                         <v-card-actions>
                             <v-btn text color="teal accent-4" small @click="slot.reveal = true">
                                 Slots
+                            </v-btn>
+                            <v-spacer></v-spacer>
+                            <v-btn text color="teal accent-4" small @click="slot.moreDetails = true">
+                                More Details
                             </v-btn>
                         </v-card-actions>
 
@@ -82,6 +86,25 @@
                                 </v-card-text>
                                 <v-card-actions class="justify-center">
                                 <v-btn text color="teal accent-4" @click="slot.reveal = false" small >
+                                    Close
+                                </v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-expand-transition>
+                        <v-expand-transition>
+                            <v-card v-if="slot.moreDetails" class="transition-fast-in-fast-out v-card--reveal py-0" style="height: 100%;">
+                                <v-card-text>
+                                <p class="h2 text--primary text-center mb-3"> <strong> More Details </strong>  </p>
+                                <div class="text--primary">
+                                    <strong>Address:</strong><br/>
+                                    {{slot.address}}<br/>
+                                    <strong>Available Capacity 1st Dose:</strong> {{slot.available_capacity_dose1}}<br/>
+                                    <strong>Available Capacity 2nd Dose:</strong>{{slot.available_capacity_dose2}}<br/>
+                                    <strong>Fees:</strong> ₹{{slot.fee}}<br/>
+                                </div>
+                                </v-card-text>
+                                <v-card-actions class="justify-center">
+                                <v-btn text color="teal accent-4" @click="slot.moreDetails = false" small >
                                     Close
                                 </v-btn>
                                 </v-card-actions>

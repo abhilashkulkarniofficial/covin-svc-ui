@@ -63,6 +63,7 @@ const actions = {
     let sessions = result.data.sessions
     for(let i=0; i<sessions.length; i++){
       sessions[i]['reveal'] = false
+      sessions[i]['moreDetails'] = false
     }
     // console.log(result.data.sessions)
     commit('setSlots', sessions)
