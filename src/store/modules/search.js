@@ -60,10 +60,14 @@ const actions = {
       result = await axios.get('https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict',{params:filter})
     }
 
-    let sessions = result.data.sessions
-    for(let i=0; i<sessions.length; i++){
-      sessions[i]['reveal'] = false
-      sessions[i]['moreDetails'] = false
+    let sessions = []
+    for(let i=0; i<result.data.sessions.length; i++){
+      if(result.data.sessions[i].available_capacity>0){
+        result.data.sessions[i]['reveal'] = false
+        result.data.sessions[i]['moreDetails'] = false
+        sessions.push(result.data.sessions[i])
+      }
+      
     }
     // console.log(result.data.sessions)
     commit('setSlots', sessions)
