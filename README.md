@@ -18,4 +18,14 @@ npm start
 
 ### View of the project
 
+#### Search bar
+
 ![Search screen](/src/assets/search.png)
+
+#### Search Results
+
+![Search Results](/src/assets/search_results.png)
+
+#### About Us Dialog
+
+![Search screen](/src/assets/about_us.png)
