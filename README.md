@@ -15,3 +15,7 @@ Install packages and run the project locally.
 npm install
 npm start
 ```
+
+### View of the project
+
+![Search screen](/src/assets/search.png)
