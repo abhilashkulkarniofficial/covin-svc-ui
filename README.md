@@ -16,7 +16,7 @@ npm install
 npm start
 ```
 
-### View of the project
+## View of the project
 
 #### Search bar
 
