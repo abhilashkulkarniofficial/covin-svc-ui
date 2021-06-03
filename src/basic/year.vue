@@ -24,7 +24,7 @@
 <script>
 import moment from 'moment'
 export default {
-    props:['value','label','year', 'mindate', 'maxdate'],
+    props:['value','label','year'],
     data() {
         return {
         dateMenu: false,
@@ -46,37 +46,17 @@ export default {
         }
     },
     watch:{
-        dateDisp(val){
-            // console.log(val)
-            const [year, month, day] = val.split('-')
-            if(this.year){
-              this.$emit('input', `${year}`)
-            }else{
-              this.$emit('input', val)
-            }
-            
-
-            
-        }
+        // dateDisp(val){
+        //     // console.log(val)
+        //     const [year, month, day] = val.split('-')
+        //     this.$emit('input', `${day}-${month}-${year}`)
+        // },
+        // dateMenu(val){
+        //     val && this.$nextTick(() => (this.$refs.picker.activePicker = 'YEAR'))
+        // }
     },
     mounted(){
-        // if(!this.year){
-        //     this.minDate = moment().format('YYYY-MM-DD')
-        //     this.maxDate = moment().add(7,'days').format('YYYY-MM-DD')
-        // }else{
-        //   this.maxDate = moment().format('YYYY-MM-DD')
-        // }
-
-        // if(this.mindate){
-          
-        //   this.minDate = this.mindate
-        //   console.log("Mindate: ", this.minDate, moment().format('YYYY-MM-DD'))
-        // }
-        if(this.year){
-          this.maxDate = moment().format('YYYY-MM-DD')
-        }else if(this.mindate){
-            this.minDate = moment().format('YYYY-MM-DD')
-        } else{
+        if(!year){
             this.minDate = moment().format('YYYY-MM-DD')
             this.maxDate = moment().add(7,'days').format('YYYY-MM-DD')
         }

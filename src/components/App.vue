@@ -32,13 +32,13 @@
                 <v-flex xs12 sm12 md12 pb-0>
                   <v-card color="white" flat class="black--text">
                     <v-layout row wrap>
-                      <v-flex offset-md4 offset-sm4 offset-xs2 xs4 sm2 md2>
+                      <v-flex offset-md3 offset-sm3 offset-xs1 xs3 sm2 md2>
                       <v-btn text small color="success" @click="showSearch=true"> Search </v-btn>
                       </v-flex>
-                      <!-- <v-flex xs4 sm2 md2>
-                      <v-btn text small color="error" @click="showSearch=false"> Register </v-btn>
-                      </v-flex> -->
                       <v-flex xs4 sm2 md2>
+                      <v-btn text small color="error" @click="showSearch=false"> Register </v-btn>
+                      </v-flex>
+                      <v-flex xs3 sm2 md2>
                       <v-btn text small color="primary" @click="dialog=true"> About </v-btn>
                       </v-flex>
                     </v-layout>
