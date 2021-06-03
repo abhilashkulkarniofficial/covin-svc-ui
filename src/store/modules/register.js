@@ -32,7 +32,7 @@ const actions = {
       commit('setUser', userData)
       return result.status
     }catch(err){
-      if(err.includes('409')) console.log(409)
+      // if(err.includes('409')) console.log(409)
       return err
     }
     
