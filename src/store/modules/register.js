@@ -26,13 +26,13 @@ const actions = {
       if(test){
         query = `${query}&test=true`
       }
-      // console.log(query, JSON.stringify(body))
+      console.log(query, JSON.stringify(body))
       result = await axios.post(query, body)
-      // console.log(result)
+      console.log(result)
       commit('setUser', userData)
       return result.status
     }catch(err){
-      // if(err.includes('409')) console.log(409)
+      if(err.includes('409')) console.log(409)
       return err
     }
     

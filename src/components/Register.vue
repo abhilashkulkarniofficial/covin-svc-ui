@@ -192,7 +192,7 @@ export default {
         // this.$store.dispatch('search/searchCenters',"this")
         this.$store.commit('search/setSlots',[])        
         this.$store.dispatch('search/getStates')
-        // console.log(process.env.VUE_APP_SECRET_CODE)
+        console.log(process.env.VUE_APP_SECRET_CODE)
     },
     watch: {
       async state (val) {
