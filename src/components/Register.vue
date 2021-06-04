@@ -241,7 +241,7 @@ export default {
                 let params = {
                     vaccine: this.vaccinePref?this.parseVaccine(this.vaccinePref):"any",
                     payment: this.fees?this.fees:"any",
-                    code: process.env.VUE_APP_SECRET_CODE
+                    code: process.env.SECRET_CODE
                 }
 
                 let date = this.startDate?this.startDate:moment()
