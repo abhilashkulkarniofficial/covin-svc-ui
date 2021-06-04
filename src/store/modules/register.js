@@ -22,12 +22,16 @@ const actions = {
       let params = userData.params
       let body = userData.body
       let test = false
-      let query = `https://vaccine-track.azurewebsites.net/api/registration?vaccine=${params.vaccine.toUpperCase()}&payment=${params.payment.toUpperCase()}&code=${params.code}`
+      let query = `https://vaccine-track.azurewebsites.net/api/registration?vaccine=${params.vaccine.toUpperCase()}&payment=${params.payment.toUpperCase()}&code=zMJcpnCzp9mdF/9oDbh3amh0ymbrwUONzixeR4dJaZKsIUglYHBY/A==`
       if(test){
         query = `${query}&test=true`
       }
       // console.log(query, JSON.stringify(body))
-      result = await axios.post(query, body)
+      result = await axios.post(query, body).catch(err => {
+        if(err.response.status === 409){
+          return err.response.status
+        }
+      })
       // console.log(result)
       commit('setUser', userData)
       return result.status
