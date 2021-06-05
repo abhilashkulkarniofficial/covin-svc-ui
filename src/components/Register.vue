@@ -193,7 +193,7 @@ export default {
         this.$store.commit('search/setSlots',[])        
         this.$store.dispatch('search/getStates')
         // console.log(process.env.SECRET_CODE)
-        // this.setIt()
+        this.setIt()
     },
     watch: {
       async state (val) {
@@ -228,7 +228,7 @@ export default {
         // eslint-disable-next-line no-unused-vars
         setIt(){
             this.name = 'Abhilash'
-            this.email = '1bm15cs002@bmsce.ac.in'
+            this.email = 'abhi0002@bmsce.ac.in'
             this.phoneNumber = '9958893440'
             this.radioGroup = 'pincode'
             this.pincode = '110010'

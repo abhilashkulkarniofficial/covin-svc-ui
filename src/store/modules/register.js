@@ -22,11 +22,13 @@ const actions = {
       let body = userData.body
       await axios.post(`https://covin-svc-api.herokuapp.com/newUser`,body)
         .then(response => {
+          // console.log(response)
           result = response
-          if(response.data===409){
+          if(response.data.status==="409"){
             result.status = 409
           }
         }).catch(err => {
+          // console.log(err)
           result = err
         })
         
