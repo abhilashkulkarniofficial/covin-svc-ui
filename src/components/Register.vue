@@ -193,7 +193,7 @@ export default {
         this.$store.commit('search/setSlots',[])        
         this.$store.dispatch('search/getStates')
         // console.log(process.env.SECRET_CODE)
-        this.setIt()
+        // this.setIt()
     },
     watch: {
       async state (val) {
