@@ -238,11 +238,6 @@ export default {
 
             if(val){
                 this.loading = true
-                let params = {
-                    vaccine: this.vaccinePref?this.parseVaccine(this.vaccinePref):"any",
-                    payment: this.fees?this.fees:"any",
-                    code: process.env.SECRET_CODE
-                }
 
                 let date = this.startDate?this.startDate:moment()
 
@@ -257,11 +252,13 @@ export default {
                     },
                     pinCode: this.pincode?`[${this.pincode}]`:"",
                     districtCode: this.district?JSON.stringify(this.district):"",
-                    phone: this.phoneNumber
+                    phone: this.phoneNumber,
+                    vaccine: this.vaccinePref?this.parseVaccine(this.vaccinePref):"ANY",
+                    payment: this.fees?this.fees.toUpperCase():"ANY",
 
                 }
 
-                this.resultCode = await this.$store.dispatch('register/register', {params:params, body:body})
+                this.resultCode = await this.$store.dispatch('register/register', {body:body})
                 // console.log(this.resultCode)
                 this.loading = false
                 this.dialog = true
@@ -280,9 +277,10 @@ export default {
             }
         },
         parseVaccine(data){
+            if(!data.length) return "ANY"
             let vax = ``
             for(const x of data){
-                vax = `${vax}${x},`
+                vax = `${vax}${x.toUpperCase()},`
             }
             return vax.slice(0,vax.length-1)
         },

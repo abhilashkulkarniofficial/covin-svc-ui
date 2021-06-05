@@ -19,16 +19,17 @@ const actions = {
   async register({commit}, userData){
     let result
     try{
-      let params = userData.params
       let body = userData.body
-      let test = false
-      let query = `https://vaccine-track.azurewebsites.net/api/registration?vaccine=${params.vaccine.toUpperCase()}&payment=${params.payment.toUpperCase()}&code=${params.code}`
-      if(test){
-        query = `${query}&test=true`
-      }
-      // console.log(query, JSON.stringify(body))
-      result = await axios.post(query, body)
-      // console.log(result)
+      await axios.post(`https://covin-svc-api.herokuapp.com/newUser`,body)
+        .then(response => {
+          result = response
+          if(response.data===409){
+            result.status = 409
+          }
+        }).catch(err => {
+          result = err
+        })
+        
       commit('setUser', userData)
       return result.status
     }catch(err){
