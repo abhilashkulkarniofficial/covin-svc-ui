@@ -20,7 +20,7 @@ const actions = {
     let result
     try{
       let body = userData.body
-      await axios.post(`https://covin-svc-api.herokuapp.com/newUser`,body)
+      await axios.post(`${process.env.VUE_APP_SERVER}/newUser`,body)
         .then(response => {
           // console.log(response)
           result = response
