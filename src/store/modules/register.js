@@ -20,7 +20,6 @@ const actions = {
     let result
     try{
       let body = userData.body
-      body['test'] = true
       await axios.post(`${process.env.VUE_APP_SERVER}/newUser`,body)
         .then(response => {
           // console.log(response)

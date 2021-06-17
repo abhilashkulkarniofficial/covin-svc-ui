@@ -27,10 +27,10 @@
                                                 <Date v-model="selectedDate" label="Date" @input="closeDate()"/>
                                             </v-flex>
                                             <v-flex xs12 sm4 md4 my-n2>
-                                                <v-select disabled v-model="vaccine" :items="vaccines" item-text="vaccine_name" item-value="vaccine_id" label="Vaccine Preference" placeholder="Covishield" outlined dense></v-select>
+                                                <v-select v-model="vaccine" :items="vaccines" item-text="vaccine_name" item-value="vaccine_id" label="Vaccine Preference" placeholder="Covishield" outlined dense multiple clearable></v-select>
                                             </v-flex>
                                             <v-flex xs12 sm4 my-n2 md2>
-                                                <v-select disabled v-model="ageLimit" :items="ages" label="Age Limit" placeholder="12" outlined dense></v-select>
+                                                <v-select v-model="ageLimit" :items="ages" label="Age Limit" placeholder="12" outlined dense clearable></v-select>
                                             </v-flex>
                                             <v-flex xs12 sm4 my-n2 md2>
                                                 <v-btn class="white--text" color="#D46A6A" :disabled="disable[0] && (disable[1] || district==null) " @click="searchCenters" block>Search</v-btn>
@@ -160,14 +160,14 @@ import Date from '../basic/date.vue'
         tab:null,
         items: [],
         vaccines: [
-            {vaccine_name:'Covishield', vaccine_id:'covishield'},
-            {vaccine_name:'Covaxin', vaccine_id:'covaxin'},
-            {vaccine_name:'Sputnik', vaccine_id:'sputnik'},
+            {vaccine_name:'Covishield', vaccine_id:'COVISHIELD'},
+            {vaccine_name:'Covaxin', vaccine_id:'COVAXIN'},
+            {vaccine_name:'Sputnik', vaccine_id:'SPUTNIK'},
         ],
         vaccine:null,
         selectedDate:null,
         ageLimit:null,
-        ages:[18, 45],
+        ages:[0, 18, 45],
         panel: 0,
         readonly: false,
       }
@@ -203,13 +203,21 @@ import Date from '../basic/date.vue'
             if(!this.selectedDate){
                 this.filter['date'] = this.currentDateTime()
             }else{
-                this.filter['date'] = this.selectedDate
+                let [year,month,date] = this.selectedDate.split('-')
+                this.filter['date'] = `${date}-${month}-${year}`
             }
+            
             this.filter['searchBy'] = this.disable
+            this.filter['ageLimit'] = this.ageLimit
+            this.filter['vaccinePref'] = this.vaccine
             // console.log(this.filter, this.selectedDate)
             this.slots = null
             await this.$store.dispatch('search/searchCenters',this.filter)
-            this.slots = JSON.parse(JSON.stringify(this.centerSlots)) // Do not change this. This does deep copy
+            // console.log(this.centerSlots)
+            if(this.centerSlots){
+                this.slots = JSON.parse(JSON.stringify(this.centerSlots)) // Do not change this. This does deep copy
+            }
+            
             this.panel = null
             // console.log(this.slots)
         },
