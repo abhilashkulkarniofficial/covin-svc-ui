@@ -114,8 +114,8 @@
                                         <div class="text--primary">
                                             <strong>Address:</strong><br/>
                                             {{slot.address}}<br/>
-                                            <strong>Available Capacity 1st Dose:</strong> {{slot.available_capacity_dose1}}<br/>
-                                            <strong>Available Capacity 2nd Dose:</strong>{{slot.available_capacity_dose2}}<br/>
+                                            <strong>Available Capacity 1st Dose: </strong> {{slot.available_capacity_dose1}}<br/>
+                                            <strong>Available Capacity 2nd Dose: </strong>{{slot.available_capacity_dose2}}<br/>
                                             <strong>Fees:</strong> ₹{{slot.fee}}<br/>
                                         </div>
                                         </v-card-text>
@@ -218,7 +218,7 @@ import Date from '../basic/date.vue'
                 this.slots = JSON.parse(JSON.stringify(this.centerSlots)) // Do not change this. This does deep copy
             }
             
-            this.panel = null
+            if(this.slots.length) this.panel = null
             // console.log(this.slots)
         },
         currentDateTime() {

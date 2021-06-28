@@ -44,56 +44,22 @@
             </v-card>
         </v-dialog>
     <v-app> 
-      <v-app-bar color="white" dark app flat align="center" elevate-on-scroll>
-        <v-container grid-list-md text-xs-center>
-            <v-layout row wrap mt-6>
-                <v-flex xs12 sm12 md12>
-                  <v-card color="white" flat class="black--text">
-                    <h3>Vaccine Availability Tracker</h3>
-                  </v-card>
-                </v-flex>
-                <v-flex xs12 sm12 md12 pb-0>
-                  <v-card color="white" flat class="black--text">
-                    <v-layout row wrap>
-                      <v-flex offset-md3 offset-sm3 offset-xs1 xs3 sm2 md2>
-                      <v-btn text small color="success" @click="showSearch=true"> Search </v-btn>
-                      </v-flex>
-                      <v-flex xs4 sm2 md2>
-                      <v-btn text small color="error" @click="showSearch=false"> Register </v-btn>
-                      </v-flex>
-                      <v-flex xs3 sm2 md2>
-                      <v-btn text small color="primary" @click="dialog=true"> About </v-btn>
-                      </v-flex>
-                    </v-layout>
-                  </v-card>
-                </v-flex>
-            </v-layout>
-        </v-container>
-      <!-- <v-toolbar-title>Vaccine Availability Tracker</v-toolbar-title> -->
-      <!-- <v-spacer></v-spacer> -->
-      <!-- <v-tooltip bottom>
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn icon @click="showSearch=true" v-bind="attrs" v-on="on">
-          <v-icon>mdi-crosshairs</v-icon>
-      </v-btn>
-      </template>
-      <span>Search</span>
-    </v-tooltip>
-    <v-tooltip bottom>
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn icon @click="showSearch=false" v-bind="attrs" v-on="on">
+      <v-app-bar color="#A33643" dark app flat align="center" elevate-on-scroll>
+        <v-toolbar-title>My Vaccination</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-btn icon to="/search">
+          <v-icon>mdi-magnify</v-icon>
+        </v-btn>
+        <v-btn icon to="/">
           <v-icon>mdi-account-plus</v-icon>
-      </v-btn>
-      </template>
-      <span>Subscribe</span>
-    </v-tooltip> -->
+        </v-btn>
+        <v-btn text @click="dialog=true"> About </v-btn>
     </v-app-bar>
 
     
 
     <v-main>
-      <Search v-if="showSearch"/>
-      <Register v-if="!showSearch"/>
+      <router-view></router-view>
     </v-main>
 
     <v-footer padless color="white">
@@ -108,15 +74,15 @@
 </template>
 
 <script>
-import Search from './Search';
-import Register from './Register';
+// import Search from './components/Search';
+// import Register from './components/Register';
 
 export default {
   name: 'App',
 
   components: {
-    Search,
-    Register
+    // Search,
+    // Register
   },
 
   data(){
